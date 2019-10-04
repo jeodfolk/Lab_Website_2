@@ -151,5 +151,34 @@ var players = [{name:"John Doe", img: "../resources/img/player1.jpg", alt:"Image
 					  avg_r_yards   - the average number of rushing yards for the player's Buff career
 					  avg_rec_yards - the average number of receiving yards for the player's Buff career
 */
+			function loadPlayersPage()
+				{
+				var drop = document.getElementById("player_selector");
+				for(var i = 0; i < players.length; i++)
+					{
+					var a = document.createElement('a');
+					a.setAttribute('class', "dropdown-item");
+					a.setAttribute('id', i);
+					a.setAttribute('href', "#");
+					a.setAttribute('onclick', "switchPlayers("+i+");");
+					a.textContent = players[i].name;
+					a.value = players[i].name
+					drop.appendChild(a);
+					}
+				}
+
+			function switchPlayers(playerNum)
+				{
+				document.getElementById("player_img").src = players[playerNum].img;
+				document.getElementById("p_year").innerHTML = players[playerNum].year;
+				document.getElementById("p_major").innerHTML = players[playerNum].major;
+				document.getElementById("g_played").innerHTML = players[playerNum].games_played;
+				document.getElementById("p_yards").innerHTML = players[playerNum].pass_yards;
+				document.getElementById("avg_p_yards").innerHTML = (players[playerNum].pass_yards/players[playerNum].games_played).toFixed(2);
+				document.getElementById("r_yards").innerHTML = players[playerNum].rushing_yards;
+				document.getElementById("avg_r_yards").innerHTML = (players[playerNum].rushing_yards/players[playerNum].games_played).toFixed(2);
+				document.getElementById("rec_yards").innerHTML = players[playerNum].receiving_yards;
+				document.getElementById("avg_rec_yards").innerHTML = (players[playerNum].receiving_yards/players[playerNum].games_played).toFixed(2);
+				}
 				
 

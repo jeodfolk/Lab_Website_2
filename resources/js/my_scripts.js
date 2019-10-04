@@ -17,52 +17,56 @@ var players = [{name:"John Doe", img: "../resources/img/player1.jpg", alt:"Image
 				{name:"Robert Myers", img: "../resources/img/player4.jpg", alt:"Image of Player 4", year:"Senior", major:"Computer Science", games_played: 31, pass_yards: 802, rushing_yards: 375, receiving_yards: 128}];
 
 
+/*
+	Registration Page:
+	viewStudentStats(id, toggle)	method						
+	parameters:
+		id - The css id of the html tag being updated.
+		toggle - 
+			0 - hide the html tag
+			1 - make the html tag visible
+	
+	purpose: This method will accept the id of an html tag and a toggle value.
+			 The method will then set the html tag's css visibility and height.  
+			 To hide the html tag (toggle - 0), the visibility will be set to hidden and
+			 the height will be set to 0.  
+			 To reveal the html tag (toggle - 1), the visibility will be set to visible and
+			 the height will be set to auto.
+*/
 
-	//Registration Page:
-									
-		function viewStudentStats(id, toggle)
+	function viewStudentStats(id, toggle)
+		{
+		tag = document.getElementById(id)
+		if(toggle == 1)
 			{
-			tag = document.getElementById(id)
-			if(toggle == 1)
-				{
-				tag.style.visibility = "visible";
-				tag.style.height = "auto"
-				}
-			else
-				{
-				tag.style.visibility = "hidden";
-				tag.style.height = "0"
-				}
-			return;
+			tag.style.visibility = "visible";
+			tag.style.height = "auto"
 			}
-			// parameters:
-			// 	id - The css id of the html tag being updated.
-			// 	toggle - 
-			// 		0 - hide the html tag
-			// 		1 - make the html tag visible
-			
-			// purpose: This method will accept the id of an html tag and a toggle value.
-			// 		 The method will then set the html tag's css visibility and height.  
-			// 		 To hide the html tag (toggle - 0), the visibility will be set to hidden and
-			// 		 the height will be set to 0.  
-			// 		 To reveal the html tag (toggle - 1), the visibility will be set to visible and
-			// 		 the height will be set to auto.
-
-				
-
-	//Home Page: 
-		function changeColor(color)
+		else
 			{
-			document.body.style.backgroundColor = color;
-			return;
+			tag.style.visibility = "hidden";
+			tag.style.height = "0"
 			}
-			// parameter: 
-			
-			// 	color- A css color
+		return;
+		}
 				
-			// purpose: This method will set the html body's background color to the 
-			// 		 provided parameter.
+/*
+	Home Page: 
+	changeColor(color) method
+	parameter: 
+	
+		color- A css color
+	
+	purpose: This method will set the html body's background color to the 
+			 provided parameter.
+	
+*/
 
+	function changeColor(color)
+		{
+		document.body.style.backgroundColor = color;
+		return;
+		}
 
 
 /*
@@ -82,32 +86,32 @@ var players = [{name:"John Doe", img: "../resources/img/player1.jpg", alt:"Image
 						4. Update the second table to show the total number of wins/losses for the Buffs.
 */
 	function loadStatsPage()
-			{
-			var table = document.getElementById("stats_table");//Retrieve our table element
-			var wltable = document.getElementById("wl_table");//Retrieve our table element
-			var row_counter;//Keeps track of our row index
-			var col_counter;//Keeps track of our column index
-			var cell_value;
-			var wins = 0;
-			var loses = 0;
-			for(row_counter = 2; row_counter < table.rows.length; row_counter++)
-				{//Outer for loop iterates over each row
-				var home = table.rows[row_counter].cells[2].innerHTML;
-				var away = table.rows[row_counter].cells[3].innerHTML;
-				if(home - away < 0)
-					{
-					table.rows[row_counter].cells[4].innerHTML = table.rows[row_counter].cells[1].innerHTML;
-					loses++;
-					}
-				else
-					{
-					table.rows[row_counter].cells[4].innerHTML = "CU Boulder";
-					wins++;
-					}
+		{
+		var table = document.getElementById("stats_table");//Retrieve our table element
+		var wltable = document.getElementById("wl_table");//Retrieve our table element
+		var row_counter;//Keeps track of our row index
+		var col_counter;//Keeps track of our column index
+		var cell_value;
+		var wins = 0;
+		var loses = 0;
+		for(row_counter = 2; row_counter < table.rows.length; row_counter++)
+			{//Outer for loop iterates over each row
+			var home = table.rows[row_counter].cells[2].innerHTML;
+			var away = table.rows[row_counter].cells[3].innerHTML;
+			if(home - away < 0)
+				{
+				table.rows[row_counter].cells[4].innerHTML = table.rows[row_counter].cells[1].innerHTML;
+				loses++;
 				}
-			wltable.rows[1].cells[0].innerHTML = wins;
-			wltable.rows[1].cells[1].innerHTML = loses;
+			else
+				{
+				table.rows[row_counter].cells[4].innerHTML = "CU Boulder";
+				wins++;
+				}
 			}
+		wltable.rows[1].cells[0].innerHTML = wins;
+		wltable.rows[1].cells[1].innerHTML = loses;
+		}
 
 /*
 	Football Player Information Page
@@ -151,34 +155,35 @@ var players = [{name:"John Doe", img: "../resources/img/player1.jpg", alt:"Image
 					  avg_r_yards   - the average number of rushing yards for the player's Buff career
 					  avg_rec_yards - the average number of receiving yards for the player's Buff career
 */
-			function loadPlayersPage()
-				{
-				var drop = document.getElementById("player_selector");
-				for(var i = 0; i < players.length; i++)
-					{
-					var a = document.createElement('a');
-					a.setAttribute('class', "dropdown-item");
-					a.setAttribute('id', i);
-					a.setAttribute('href', "#");
-					a.setAttribute('onclick', "switchPlayers("+i+");");
-					a.textContent = players[i].name;
-					a.value = players[i].name
-					drop.appendChild(a);
-					}
-				}
+		
+	function loadPlayersPage()
+		{
+		var drop = document.getElementById("player_selector");
+		for(var i = 0; i < players.length; i++)
+			{
+			var a = document.createElement('a');
+			a.setAttribute('class', "dropdown-item");
+			a.setAttribute('id', i);
+			a.setAttribute('href', "#");
+			a.setAttribute('onclick', "switchPlayers("+i+");");
+			a.textContent = players[i].name;
+			a.value = players[i].name
+			drop.appendChild(a);
+			}
+		}
 
-			function switchPlayers(playerNum)
-				{
-				document.getElementById("player_img").src = players[playerNum].img;
-				document.getElementById("p_year").innerHTML = players[playerNum].year;
-				document.getElementById("p_major").innerHTML = players[playerNum].major;
-				document.getElementById("g_played").innerHTML = players[playerNum].games_played;
-				document.getElementById("p_yards").innerHTML = players[playerNum].pass_yards;
-				document.getElementById("avg_p_yards").innerHTML = (players[playerNum].pass_yards/players[playerNum].games_played).toFixed(2);
-				document.getElementById("r_yards").innerHTML = players[playerNum].rushing_yards;
-				document.getElementById("avg_r_yards").innerHTML = (players[playerNum].rushing_yards/players[playerNum].games_played).toFixed(2);
-				document.getElementById("rec_yards").innerHTML = players[playerNum].receiving_yards;
-				document.getElementById("avg_rec_yards").innerHTML = (players[playerNum].receiving_yards/players[playerNum].games_played).toFixed(2);
-				}
+	function switchPlayers(playerNum)
+		{
+		document.getElementById("player_img").src = players[playerNum].img;
+		document.getElementById("p_year").innerHTML = players[playerNum].year;
+		document.getElementById("p_major").innerHTML = players[playerNum].major;
+		document.getElementById("g_played").innerHTML = players[playerNum].games_played;
+		document.getElementById("p_yards").innerHTML = players[playerNum].pass_yards;
+		document.getElementById("avg_p_yards").innerHTML = (players[playerNum].pass_yards/players[playerNum].games_played).toFixed(2);
+		document.getElementById("r_yards").innerHTML = players[playerNum].rushing_yards;
+		document.getElementById("avg_r_yards").innerHTML = (players[playerNum].rushing_yards/players[playerNum].games_played).toFixed(2);
+		document.getElementById("rec_yards").innerHTML = players[playerNum].receiving_yards;
+		document.getElementById("avg_rec_yards").innerHTML = (players[playerNum].receiving_yards/players[playerNum].games_played).toFixed(2);
+		}
 				
 
